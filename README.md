@@ -1,11 +1,18 @@
-Maze Pathfinding using Iterative Deepening Depth-First Search (IDDFS)
+Maze Pathfinding Algorithms: IDDFS & A*
 
-📌 Project Overview
+This repository contains two popular maze-solving algorithms implemented in Python:
 
-This project implements a maze pathfinding algorithm using Iterative Deepening Depth-First Search (IDDFS).
-Given a 2D grid maze containing empty cells (0) and walls (1), the program determines whether a valid path exists between a start and target cell.
+Iterative Deepening Depth-First Search (IDDFS)
 
-Movement is allowed in four directions:
+A* Search Algorithm
+
+Both programs work on grid-based mazes, support four-directional movement, and demonstrate different approaches to solving pathfinding problems.
+
+📌 1. Maze Pathfinding using Iterative Deepening Depth-First Search (IDDFS)
+Project Overview
+
+This implementation uses the IDDFS algorithm to determine whether a valid path exists between a start and a target cell in a 2D maze.
+The maze contains empty cells (0) and walls (1), and movement is allowed in:
 
 Up
 
@@ -15,26 +22,23 @@ Left
 
 Right
 
-The search avoids revisiting any cell within a single path exploration and increases the depth limit iteratively until a solution is found or all depths are exhausted.
+IDDFS increases the depth limit gradually, combining the completeness of BFS with the memory efficiency of DFS.
 
-🎯 Features
+Features
 
 Fully working IDDFS algorithm
 
 Prevents revisiting cells using a visited matrix
 
-Works for any grid size
+Works with any grid size
 
-Accepts user input in structured format
+Accepts user input
 
 Returns traversal path if found
 
-Reports failure when no path exists
+Reports failure if no path exists
 
-📥 Input Format
-
-The program expects input in the following structure:
-
+Input Format
 rows cols
 <row1 values>
 <row2 values>
@@ -52,87 +56,145 @@ Example:
 Start: 0 0
 Target: 2 3
 
-📤 Output Format
-
+Output Format
 If a path is found:
-
 Path found at depth <D> using IDDFS
-Traversal Order: [(x1,y1), (x2,y2), ..., (xn,yn)]
-
+Traversal Order: [(x1,y1), (x2,y2), ...]
 
 If no path exists:
-
 Path not found at max depth <D> using IDDFS
 
-🧠 Algorithm Logic (IDDFS)
-
-IDDFS works by repeatedly applying Depth-Limited DFS with increasing depth limits:
+Algorithm Logic (IDDFS)
 
 Start with depth = 0
 
-Perform DFS but stop when depth reaches limit
+Run DFS with a depth limit
 
-If target not found, increase depth and repeat
+If not found → increase depth
 
-Stop when solution is found or maximum possible depth reached
+Repeat until solution is found or max depth reached
 
-This combines the memory efficiency of DFS with the completeness of BFS.
+This approach prevents unnecessary memory usage while ensuring complete search coverage.
 
-🧩 Code Description
+How to Run
 
-is_valid()
-Checks if the next move is inside the grid, not a wall, and not visited.
+Save the script as:
 
-dfs_limited()
-Performs DFS up to a given depth limit. Uses backtracking to explore alternate paths.
+iddfs_maze.py
 
-iddfs()
-Runs DFS repeatedly with increasing depth limits until the target is found.
 
-Input reading section
-Handles structured user input for grid, start, and target.
-
-▶️ How to Run
-
-Save the Python file (e.g., iddfs_maze.py)
-
-Run using:
+Run the program:
 
 python iddfs_maze.py
 
 
-Provide input when prompted (copy and paste the input format).
+Input the maze when prompted.
 
-🧪 Sample Test Case
-Input:
-4 4
-0 0 1 0
-1 0 1 0
-0 0 0 0
-1 1 0 1
-Start: 0 0
-Target: 2 3
-
-Output:
+Sample Output
 Path found at depth 5 using IDDFS
 Traversal Order: [(0,0), (0,1), (1,1), (2,1), (2,2), (2,3)]
 
+📌 2. Maze Pathfinding using A* Search Algorithm
+Project Overview
+
+This implementation uses the A* algorithm to compute the shortest path in a maze using the Manhattan distance heuristic.
+The maze is loaded from an input.txt file.
+
+Features
+
+Reads maze grid from input.txt
+
+Supports Up, Down, Left, Right movement
+
+Optimal pathfinding using A* algorithm
+
+Uses Manhattan distance heuristic
+
+Reconstructs and prints the shortest path
+
+Clean, modular Python code
+
+Input Format (input.txt)
+R C
+<row1 values>
+<row2 values>
+...
+<row R values>
+sr sc
+tr tc
+
+Example:
+5 5
+0 1 0 0 0
+0 1 0 1 0
+0 0 0 1 0
+1 1 0 0 0
+0 0 0 1 0
+0 0
+4 4
+
+How to Run
+
+Keep these two files in the same folder:
+
+astar_maze.py
+input.txt
+
+
+Run the program:
+
+python3 astar_maze.py
+
+Algorithm Logic (A*)
+
+A* uses the priority function:
+
+f(n) = g(n) + h(n)
+
+
+Where:
+
+g(n) = cost from start to current node
+
+h(n) = Manhattan distance to target
+
+f(n) = total score used to select the next best node
+
+Sample Output
+Shortest path found:
+(0, 0)
+(1, 0)
+(2, 0)
+(2, 1)
+(2, 2)
+(3, 2)
+(4, 2)
+(4, 3)
+(4, 4)
+
+📁 Project Structure
+/
+├── iddfs_maze.py
+├── astar_maze.py
+├── input.txt
+└── README.md
+
 📚 Learning Outcomes
 
-Understanding and implementing IDDFS
+Understanding IDDFS and DFS backtracking
 
-Working with recursive DFS and backtracking
+Implementing A* with heuristics
 
-Handling grid-based pathfinding
+Working with grid-based pathfinding
 
-Managing visited states correctly
+Creating modular search algorithms
 
-Building user-interactive Python scripts
+Reading structured input files
 
 📄 License
 
-This project is open-source and free to use under the MIT License.
+This project is open-source under the MIT License.
 
-🤝 Contributions
+👤 Author
 
-Feel free to submit issues or pull requests to improve the project, optimize searching, or add visualizations.
+Developed by Rayhan.
