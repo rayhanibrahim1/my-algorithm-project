@@ -1,88 +1,138 @@
-A* Search Algorithm for Maze Pathfinding
+Maze Pathfinding using Iterative Deepening Depth-First Search (IDDFS)
 
-This project implements the A* search algorithm to find the shortest path in a 2D grid-based maze.
-The maze is loaded from an input.txt file, and the algorithm computes the optimal path from the start cell to the target cell using the Manhattan distance heuristic.
+📌 Project Overview
 
-FEATURES
+This project implements a maze pathfinding algorithm using Iterative Deepening Depth-First Search (IDDFS).
+Given a 2D grid maze containing empty cells (0) and walls (1), the program determines whether a valid path exists between a start and target cell.
 
-Reads maze dimensions and grid from input.txt
+Movement is allowed in four directions:
 
-Supports four-directional movement (Up, Down, Left, Right)
+Up
 
-Avoids walls and invalid cells
+Down
 
-Uses the A* algorithm for optimal pathfinding
+Left
 
-Uses Manhattan distance as the heuristic
+Right
 
-Reconstructs and prints the shortest path
+The search avoids revisiting any cell within a single path exploration and increases the depth limit iteratively until a solution is found or all depths are exhausted.
 
-Simple, modular Python implementation
+🎯 Features
 
-INPUT FORMAT (input.txt)
+Fully working IDDFS algorithm
 
-R C
-<row 1 values>
-<row 2 values>
+Prevents revisiting cells using a visited matrix
+
+Works for any grid size
+
+Accepts user input in structured format
+
+Returns traversal path if found
+
+Reports failure when no path exists
+
+📥 Input Format
+
+The program expects input in the following structure:
+
+rows cols
+<row1 values>
+<row2 values>
 ...
-<row R values>
-sr sc
-tr tc
+<rowN values>
+Start: x y
+Target: x y
 
-Example input:
-5 5
-0 1 0 0 0
-0 1 0 1 0
-0 0 0 1 0
-1 1 0 0 0
-0 0 0 1 0
-0 0
+Example:
 4 4
+0 0 1 0
+1 0 1 0
+0 0 0 0
+1 1 0 1
+Start: 0 0
+Target: 2 3
 
-HOW TO RUN
+📤 Output Format
 
-Install Python 3.
+If a path is found:
 
-Place astar_maze.py and input.txt in the same directory.
+Path found at depth <D> using IDDFS
+Traversal Order: [(x1,y1), (x2,y2), ..., (xn,yn)]
 
-Run the program using:
 
-python3 astar_maze.py
+If no path exists:
 
-ALGORITHM USED: A*
+Path not found at max depth <D> using IDDFS
 
-A* calculates:
+🧠 Algorithm Logic (IDDFS)
 
-f(n) = g(n) + h(n)
+IDDFS works by repeatedly applying Depth-Limited DFS with increasing depth limits:
 
-where:
-g(n) = actual cost from start to current node
-h(n) = Manhattan distance to target
-f(n) = priority value used to expand nodes
+Start with depth = 0
 
-SAMPLE OUTPUT
+Perform DFS but stop when depth reaches limit
 
-Shortest path found:
-(0, 0)
-(1, 0)
-(2, 0)
-(2, 1)
-(2, 2)
-(3, 2)
-(4, 2)
-(4, 3)
-(4, 4)
+If target not found, increase depth and repeat
 
-PROJECT STRUCTURE
+Stop when solution is found or maximum possible depth reached
 
-astar_maze.py
-input.txt
-README.md
+This combines the memory efficiency of DFS with the completeness of BFS.
 
-LICENSE
+🧩 Code Description
 
-Open-source and free to use.
+is_valid()
+Checks if the next move is inside the grid, not a wall, and not visited.
 
-AUTHOR
+dfs_limited()
+Performs DFS up to a given depth limit. Uses backtracking to explore alternate paths.
 
-Developed by Rayhan.
+iddfs()
+Runs DFS repeatedly with increasing depth limits until the target is found.
+
+Input reading section
+Handles structured user input for grid, start, and target.
+
+▶️ How to Run
+
+Save the Python file (e.g., iddfs_maze.py)
+
+Run using:
+
+python iddfs_maze.py
+
+
+Provide input when prompted (copy and paste the input format).
+
+🧪 Sample Test Case
+Input:
+4 4
+0 0 1 0
+1 0 1 0
+0 0 0 0
+1 1 0 1
+Start: 0 0
+Target: 2 3
+
+Output:
+Path found at depth 5 using IDDFS
+Traversal Order: [(0,0), (0,1), (1,1), (2,1), (2,2), (2,3)]
+
+📚 Learning Outcomes
+
+Understanding and implementing IDDFS
+
+Working with recursive DFS and backtracking
+
+Handling grid-based pathfinding
+
+Managing visited states correctly
+
+Building user-interactive Python scripts
+
+📄 License
+
+This project is open-source and free to use under the MIT License.
+
+🤝 Contributions
+
+Feel free to submit issues or pull requests to improve the project, optimize searching, or add visualizations.
